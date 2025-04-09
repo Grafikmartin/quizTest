@@ -1,0 +1,79 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(to right, #e0f2fe, #f0f9ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 900px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  
+  #themaInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin: 1rem auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    display: block;
+    box-sizing: border-box;
+  }
+  
+  .grid-themen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+  }
+  
+  .thema-card {
+    background-color: #3b82f6;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .thema-card:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+  }
+  .thema-card.active {
+    background-color: #10b981;
+    transform: scale(1.05);
+  }
+  
+  #startBtn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  #startBtn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
