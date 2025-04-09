@@ -1,7 +1,12 @@
 export default async function handler(req, res) {
-    const { thema } = req.body;
+    try {
+      const { thema } = req.body;
   
-    const prompt = `Erstelle 10 Quizfragen zum Thema "${thema}". Jede Frage hat 4 Antwortmöglichkeiten (A bis D), nur eine ist richtig. Formatiere sie so:
+      if (!thema) {
+        return res.status(400).json({ error: "Kein Thema angegeben" });
+      }
+  
+      const prompt = `Erstelle 10 Quizfragen zum Thema "${thema}". Jede Frage hat 4 Antwortmöglichkeiten (A bis D), nur eine ist richtig. Formatiere sie so:
   
   Frage 1: [Text]
   A: ...
@@ -12,8 +17,7 @@ export default async function handler(req, res) {
   
   Wiederhole das für alle 10 Fragen.`;
   
-    try {
-      const gptRes = await fetch("https://api.openai.com/v1/chat/completions", {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,13 +30,18 @@ export default async function handler(req, res) {
         }),
       });
   
-      const json = await gptRes.json();
-      const content = json.choices[0].message.content;
+      const data = await response.json();
   
-      res.status(200).json({ quizText: content });
+      if (!data.choices || !data.choices[0]?.message?.content) {
+        console.error("GPT-Antwort ungültig:", data);
+        return res.status(500).json({ error: "GPT-Antwort ungültig" });
+      }
+  
+      const quizText = data.choices[0].message.content;
+      res.status(200).json({ quizText });
     } catch (err) {
-      console.error("GPT API Fehler:", err);
-      res.status(500).json({ error: "Fehler beim Laden des Quiz" });
+      console.error("Fehler in /api/quiz:", err.message);
+      res.status(500).json({ error: "Fehler beim Generieren des Quiz" });
     }
   }
   
