@@ -76,4 +76,24 @@ body {
     background-color: #9ca3af;
     cursor: not-allowed;
   }
+  .antworten {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+  
+  .antwort-btn {
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .antwort-btn:hover {
+    background-color: #2563eb;
+  }
   

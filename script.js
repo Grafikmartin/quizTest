@@ -44,10 +44,9 @@ startBtn.addEventListener("click", async () => {
 
     const data = await res.json();
 
-    // Nur für Testzwecke: zeige GPT-Antwort in der Konsole
-    console.log("Antwort von GPT:", data.quizText);
+    const fragen = parseQuizText(data.quizText);
+    zeigeFrage(fragen, 0, 0); // starte mit Frage 0 und Score 0
 
-    // Später: hier parsen und Quiz anzeigen
     startBtn.textContent = "🚀 Quiz starten";
   } catch (err) {
     console.error("Fehler beim Laden der Fragen:", err);
@@ -56,3 +55,79 @@ startBtn.addEventListener("click", async () => {
 
   startBtn.disabled = false;
 });
+
+// GPT-Antwort in Fragen-Array umwandeln
+function parseQuizText(text) {
+  const fragen = [];
+  const blocks = text.split(/Frage\s\d+:/g).slice(1); // jede Frage trennen
+
+  blocks.forEach(block => {
+    const lines = block.trim().split('\n');
+    const frage = lines[0];
+    const antworten = {
+      A: lines[1]?.replace(/^A:\s*/, '').trim(),
+      B: lines[2]?.replace(/^B:\s*/, '').trim(),
+      C: lines[3]?.replace(/^C:\s*/, '').trim(),
+      D: lines[4]?.replace(/^D:\s*/, '').trim()
+    };
+    const richtigLine = lines.find(line => line.startsWith('Richtige Antwort'));
+    const richtig = richtigLine ? richtigLine.split(':')[1].trim().toUpperCase() : null;
+
+    fragen.push({ frage, antworten, richtig });
+  });
+
+  return fragen;
+}
+
+// Frage anzeigen + Interaktion
+function zeigeFrage(quiz, index, score) {
+  const aktuelle = quiz[index];
+
+  document.querySelector(".container").innerHTML = `
+    <h2>Frage ${index + 1} von ${quiz.length}</h2>
+    <p>${aktuelle.frage}</p>
+    <div class="antworten">
+      ${Object.entries(aktuelle.antworten).map(([key, value]) => `
+        <button class="antwort-btn" data-key="${key}">${key}: ${value}</button>
+      `).join("")}
+    </div>
+    <p id="feedback"></p>
+  `;
+
+  document.querySelectorAll(".antwort-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const auswahl = btn.dataset.key;
+      const korrekt = aktuelle.richtig;
+
+      const feedback = document.getElementById("feedback");
+      let neuerScore = score;
+
+      if (auswahl === korrekt) {
+        feedback.textContent = "✅ Richtig!";
+        feedback.style.color = "green";
+        neuerScore++;
+      } else {
+        feedback.textContent = `❌ Falsch. Richtig war: ${korrekt}`;
+        feedback.style.color = "red";
+      }
+
+      // Weiter zur nächsten Frage
+      setTimeout(() => {
+        if (index + 1 < quiz.length) {
+          zeigeFrage(quiz, index + 1, neuerScore);
+        } else {
+          zeigeErgebnis(quiz.length, neuerScore);
+        }
+      }, 2000);
+    });
+  });
+}
+
+// Ergebnis anzeigen
+function zeigeErgebnis(gesamt, richtig) {
+  document.querySelector(".container").innerHTML = `
+    <h2>🎉 Quiz beendet!</h2>
+    <p>Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
+    <button onclick="location.reload()">🔁 Nochmal spielen</button>
+  `;
+}
