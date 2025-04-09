@@ -35,25 +35,4 @@ export default async function handler(req, res) {
       res.status(500).json({ error: "Fehler beim Laden des Quiz" });
     }
   }
-  function parseQuizText(text) {
-    const fragen = [];
-    const blocks = text.split(/Frage\s\d+:/g).slice(1); // jede Frage trennen
-  
-    blocks.forEach(block => {
-      const lines = block.trim().split('\n');
-      const frage = lines[0];
-      const antworten = {
-        A: lines[1]?.replace(/^A:\s*/, '').trim(),
-        B: lines[2]?.replace(/^B:\s*/, '').trim(),
-        C: lines[3]?.replace(/^C:\s*/, '').trim(),
-        D: lines[4]?.replace(/^D:\s*/, '').trim()
-      };
-      const richtigLine = lines.find(line => line.startsWith('Richtige Antwort'));
-      const richtig = richtigLine ? richtigLine.split(':')[1].trim().toUpperCase() : null;
-  
-      fragen.push({ frage, antworten, richtig });
-    });
-  
-    return fragen;
-  }
   

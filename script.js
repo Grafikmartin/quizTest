@@ -44,8 +44,13 @@ startBtn.addEventListener("click", async () => {
 
     const data = await res.json();
 
-    const fragen = parseQuizText(data.quizText);
-    zeigeFrage(fragen, 0, 0); // starte mit Frage 0 und Score 0
+    if (data.quizText) {
+        const fragen = parseQuizText(data.quizText);
+        zeigeFrage(fragen, 0);
+      } else {
+        alert("GPT konnte keine Fragen generieren. Bitte versuche es erneut.");
+        console.error("Antwort vom Server:", data);
+      }
 
     startBtn.textContent = "🚀 Quiz starten";
   } catch (err) {
