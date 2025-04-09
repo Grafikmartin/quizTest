@@ -1,4 +1,6 @@
 export default async function handler(req, res) {
+    console.log("🧠 API wurde aufgerufen");
+  
     try {
       const { thema } = req.body;
   
@@ -30,11 +32,10 @@ export default async function handler(req, res) {
         }),
       });
   
-      // Debug-Ausgabe: zeigt, was GPT wirklich antwortet
+      // 👇 Debug-Ausgabe: zeigt den tatsächlichen GPT-Rohtext
       const raw = await response.text();
-      console.log("Antwort von OpenAI:", raw);
+      console.log("🔍 Antwort von OpenAI:", raw);
   
-      // Versuche das Ergebnis zu parsen (falls gültig)
       const data = JSON.parse(raw);
   
       if (!data.choices || !data.choices[0]?.message?.content) {
@@ -45,7 +46,7 @@ export default async function handler(req, res) {
       const quizText = data.choices[0].message.content;
       res.status(200).json({ quizText });
     } catch (err) {
-      console.error("Fehler in /api/quiz:", err);
+      console.error("❌ Fehler in /api/quiz:", err);
       res.status(500).json({ error: "Fehler beim Generieren des Quiz" });
     }
   }
