@@ -1,3 +1,34 @@
+:root {
+  /* 🎨 Hintergrund-Design */
+  --blob-color: #0f0;
+  --blob-core: #000;
+  --blob-glow: blur(7em) brightness(5);
+  --bg-grid-color: hsl(0 0% 4%);
+
+  /* 🌈 UI-Farben */
+  --text-color: white;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-border-hover: rgba(255, 255, 255, 0.5);
+  --card-bg: rgba(174, 165, 253, 0.1);
+  --card-bg-hover: rgba(109, 8, 104, 0.5);
+  --card-bg-active: rgba(109, 8, 104, 0.7);
+  
+  --btn-bg: #247a6c;
+  --btn-bg-disabled: rgba(10, 63, 41, 0.2);
+  --btn-border: rgba(255, 255, 255, 0.1);
+  --btn-border-hover: rgba(255, 255, 255, 0.5);
+
+  --answer-bg: rgba(109, 8, 104, 0.5);
+  --answer-bg-hover: rgba(109, 8, 104, 0.7);
+
+  --input-border: #cbd5e1;
+  --select-border: #ccc;
+
+  /* 🧠 Container-Styling */
+  --container-bg: rgba(0, 0, 0, 0.8);
+  --container-shadow: rgba(0, 0, 0, 0.2);
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,122 +39,215 @@ body {
   height: 100vh;
   font-family: sans-serif;
 }
-  
+.quiz-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    #0000 0,
+    #0000 2px,
+    var(--bg-grid-color) 2px
+  );
+  background-size: 8px 8px;
+}
+
+.quiz-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  backdrop-filter: hue-rotate(90deg);
+  mask: linear-gradient(45deg, #0000, #000);
+  animation: rotaty 5s linear infinite;
+  transform-origin: center;
+}
+
+.quiz-bg::before {
+  content: "";
+  position: absolute;
+  inset: -8em;
+  z-index: -1;
+  --f: var(--blob-glow);
+  animation:
+    blobs-1e28bd3d 150s linear infinite,
+    thingy 5s linear infinite;
+  background-color: var(--blob-core);
+  background-image: radial-gradient(ellipse 66px 50px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 77px 60px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 78px 100px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 73px 96px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 76px 77px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 66px 51px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 90px 57px at 50% 50%, var(--blob-color) 0%, transparent 100%),
+                    radial-gradient(ellipse 89px 93px at 50% 50%, var(--blob-color) 0%, transparent 100%);
+  background-size:
+    726px 576px,
+    1242px 454px,
+    876px 1160px,
+    691px 873px,
+    914px 550px,
+    1159px 340px,
+    1017px 831px,
+    313px 977px;
+}
+
+@keyframes blobs-1e28bd3d {
+  0% {
+    background-position:
+      271px 478px,
+      62px 291px,
+      67px 861px,
+      553px 413px,
+      36px 392px,
+      1077px 226px,
+      400px 799px,
+      7px 264px;
+  }
+
+  to {
+    background-position:
+      -14975px -2978px,
+      31112px 11187px,
+      -20081px 8981px,
+      11609px -3952px,
+      -12760px 12492px,
+      -9354px 2946px,
+      9553px 21574px,
+      946px 9057px;
+  }
+}
+
+@keyframes thingy {
+  0% {
+    filter: var(--f) hue-rotate(0deg);
+  }
+  to {
+    filter: var(--f) hue-rotate(1turn);
+  }
+}
 .container {
   position: fixed;
-  bottom: 25px;
+  top: 5%;
   left: 25px;
   right: 25px;
-
-  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--card-border);
+  background: var(--container-bg);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px var(--container-shadow);
   width: auto;
   max-width: 900px;
   text-align: center;
   margin: 0 auto;
 }
-  
-  h1 {
-    margin-bottom: 0.5rem;
-  }
-  p {
-    color: white;
-    margin-top: -0.8rem; /* kleiner Abstand nach oben */
-    margin-bottom: 1rem;
-  }
-  #themaInput {
-    width: 100%;
-    max-width: 500px;
-    padding: 0.8rem;
-    font-size: 1rem;
-    margin: 1rem auto;
-    border: 1px solid #cbd5e1;
-    border-radius: 15px;
-    display: block;
-    box-sizing: border-box;
-  }
-  
-  #levelSelect {
-    margin-top: 0.5rem;
-    padding: 0.6rem;
-    font-size: 1rem;
-    border-radius: 15px;
-    border: 1px solid #ccc;
-    max-width: 250px;
-    width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-  }
 
+h1 {
+  margin-top: -0.5rem; 
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
 
-  .grid-themen {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0 2rem;
-  }
-  
-  .thema-card {
-    background-color:rgba(174, 165, 253, 0.1);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.2s, background-color 0.3s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  
-  .thema-card:hover {
-    background-color:rgba(109, 8, 104, 0.5);
-    transform: scale(1.05);
-  }
-  .thema-card.active {
-    background-color: rgba(109, 8, 104, 0.7);
-    transform: scale(1.05);
-  }
-  
-  #startBtn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    background-color: #247a6c;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  #startBtn:disabled {
-    background-color: rgba(10, 63, 41, 0.2);
-    cursor: not-allowed;
-  }
-  .antworten {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin-top: 1rem;
-  }
-  
-  .antwort-btn {
-    padding: 0.8rem;
-    font-size: 1rem;
-    background-color: rgba(109, 8, 104, 0.5);
-    color: white;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .antwort-btn:hover {
-    background-color:  rgba(109, 8, 104, 0.7);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-  }
-  
+p {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+#themaInput {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  margin: 1rem auto;
+  border: 1px solid var(--input-border);
+  border-radius: 15px;
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#levelSelect {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1px solid var(--select-border);
+  max-width: 250px;
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  text-align: center;
+  text-align-last: center;
+}
+
+.grid-themen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.thema-card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 2px solid var(--card-border);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.thema-card:hover {
+  background-color: var(--card-bg-hover);
+  transform: scale(1.05);
+}
+
+.thema-card.active {
+  background-color: var(--card-bg-active);
+  transform: scale(1.05);
+}
+
+#startBtn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+  border: 2px solid var(--btn-border);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#startBtn:disabled {
+  background-color: var(--btn-bg-disabled);
+  cursor: not-allowed;
+}
+
+.antworten {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.antwort-btn {
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: var(--card-bg-hover);
+  color: var(--text-color);
+  border-radius: 15px;
+  cursor: pointer;
+  border: 2px solid var(--card-border);
+}
+
+.antwort-btn:hover {
+  background-color: var(--card-bg-active);
+  border: 2px solid var(--btn-border-hover);
+}
