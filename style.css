@@ -9,9 +9,9 @@
   --text-color: white;
   --card-border: rgba(255, 255, 255, 0.1);
   --card-border-hover: rgba(255, 255, 255, 0.5);
-  --card-bg: rgba(136, 233, 176, 0.5);
-  --card-bg-hover: rgba(0, 139, 98, 0.5);
-  --card-bg-active: rgba(0, 104, 78, 0.7);
+  --card-bg: rgba(255, 0, 157, 0.4);
+  --card-bg-hover: rgba(255, 0, 157, 0.7);
+  --card-bg-active: rgba(255, 0, 157, 0.9);
   
   --btn-bg: #247a6c;
   --btn-bg-disabled: rgba(10, 63, 41, 0.2);
