@@ -8,14 +8,22 @@
 </head>
 <body>
   <div class="container">
-    <h1>🎓 Willkommen beim KI-Quiz</h1>
+    
     <p>Wähle ein Thema oder gib eins ein:</p>
 
     <input type="text" id="themaInput" placeholder="z.B. Tiere, Harry Potter, Raumfahrt" />
-
+    <label for="levelSelect" style="color: white;">Schwierigkeitsstufe:</label>
+    <select id="levelSelect">
+      <option value="Anfänger">Anfänger</option>
+      <option value="Kandidat">Kandidat</option>
+      <option value="Halbfinale">Halbfinale</option>
+      <option value="Finale">Finale</option>
+      <option value="Quizchampion">Quizchampion</option>
+    </select>
+    
     <div class="grid-themen">
       <!-- 16 Themenkarten -->
-      <div class="thema-card">Allgemeinwissen</div>
+      <div class="thema-card">Allgemein- <br>wissen</div>
       <div class="thema-card">Wissenschaft</div>
       <div class="thema-card">Film & Serien</div>
       <div class="thema-card">Geschichte</div>
@@ -33,7 +41,7 @@
       <div class="thema-card">Raumfahrt</div>
     </div>
 
-    <button id="startBtn" disabled>🚀 Quiz starten</button>
+    <button id="startBtn" disabled>Quiz starten</button>
   </div>
 
   <script src="script.js"></script>

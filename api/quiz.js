@@ -1,14 +1,12 @@
 export default async function handler(req, res) {
   try {
-    console.log("🧠 API wurde aufgerufen – KEY?", process.env.OPENAI_API_KEY ? "✅ gesetzt" : "❌ fehlt!");
+    const { thema, level } = req.body;
 
-    const { thema } = req.body;
-
-    if (!thema) {
-      return res.status(400).json({ error: "Kein Thema angegeben" });
+    if (!thema || !level) {
+      return res.status(400).json({ error: "Thema oder Level fehlt" });
     }
 
-    const prompt = `Erstelle 10 Quizfragen zum Thema "${thema}". Jede Frage hat 4 Antwortmöglichkeiten (A bis D), nur eine ist richtig. Formatiere sie so:
+    const prompt = `Erstelle 10 Quizfragen zum Thema "${thema}" mit dem Schwierigkeitsgrad "${level}". Jede Frage hat 4 Antwortmöglichkeiten (A bis D), nur eine ist richtig. Formatiere sie so:
 
 Frage 1: [Text]
 A: ...

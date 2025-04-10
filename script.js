@@ -1,4 +1,5 @@
 const themaInput = document.getElementById("themaInput");
+const levelSelect = document.getElementById("levelSelect");
 const themaCards = document.querySelectorAll(".thema-card");
 const startBtn = document.getElementById("startBtn");
 
@@ -30,6 +31,8 @@ function entferneKartenMarkierung() {
 // Quiz starten
 startBtn.addEventListener("click", async () => {
   const thema = themaInput.value.trim();
+  const level = levelSelect.value;
+
   if (!thema) return;
 
   startBtn.textContent = "⏳ Fragen werden geladen...";
@@ -39,18 +42,18 @@ startBtn.addEventListener("click", async () => {
     const res = await fetch("/api/quiz", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ thema })
+      body: JSON.stringify({ thema, level })
     });
 
     const data = await res.json();
 
     if (data.quizText) {
-        const fragen = parseQuizText(data.quizText);
-        zeigeFrage(fragen, 0);
-      } else {
-        alert("GPT konnte keine Fragen generieren. Bitte versuche es erneut.");
-        console.error("Antwort vom Server:", data);
-      }
+      const fragen = parseQuizText(data.quizText);
+      zeigeFrage(fragen, 0, 0);
+    } else {
+      alert("GPT konnte keine Fragen generieren. Bitte versuche es erneut.");
+      console.error("Antwort vom Server:", data);
+    }
 
     startBtn.textContent = "🚀 Quiz starten";
   } catch (err) {
@@ -64,7 +67,7 @@ startBtn.addEventListener("click", async () => {
 // GPT-Antwort in Fragen-Array umwandeln
 function parseQuizText(text) {
   const fragen = [];
-  const blocks = text.split(/Frage\s\d+:/g).slice(1); // jede Frage trennen
+  const blocks = text.split(/Frage\s\d+:/g).slice(1);
 
   blocks.forEach(block => {
     const lines = block.trim().split('\n');
@@ -109,14 +112,13 @@ function zeigeFrage(quiz, index, score) {
 
       if (auswahl === korrekt) {
         feedback.textContent = "✅ Richtig!";
-        feedback.style.color = "green";
+        feedback.style.color = "lightgreen";
         neuerScore++;
       } else {
         feedback.textContent = `❌ Falsch. Richtig war: ${korrekt}`;
-        feedback.style.color = "red";
+        feedback.style.color = "salmon";
       }
 
-      // Weiter zur nächsten Frage
       setTimeout(() => {
         if (index + 1 < quiz.length) {
           zeigeFrage(quiz, index + 1, neuerScore);

@@ -1,27 +1,38 @@
 body {
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(to right, #e0f2fe, #f0f9ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-  }
+  margin: 0;
+  padding: 0;
+  background-image: url("assets/studio.webp");
+  background-size: cover;        /* Deckt die ganze Fläche ab */
+  background-position: center;   /* Zentriert das Bild */
+  background-repeat: no-repeat;  /* Kein Wiederholen */
+  height: 100vh;
+  font-family: sans-serif;
+}
   
-  .container {
-    background: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    width: 95%;
-    max-width: 900px;
-    text-align: center;
-  }
+.container {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: auto;
+  max-width: 900px;
+  text-align: center;
+  margin: 0 auto;
+}
   
   h1 {
     margin-bottom: 0.5rem;
   }
-  
+  p {
+    color: white;
+    margin-top: -0.8rem; /* kleiner Abstand nach oben */
+    margin-bottom: 1rem;
+  }
   #themaInput {
     width: 100%;
     max-width: 500px;
@@ -29,11 +40,26 @@ body {
     font-size: 1rem;
     margin: 1rem auto;
     border: 1px solid #cbd5e1;
-    border-radius: 0.5rem;
+    border-radius: 15px;
     display: block;
     box-sizing: border-box;
   }
   
+  #levelSelect {
+    margin-top: 0.5rem;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    max-width: 250px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+
   .grid-themen {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -42,8 +68,9 @@ body {
   }
   
   .thema-card {
-    background-color: #3b82f6;
+    background-color:rgba(174, 165, 253, 0.1);
     color: white;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     padding: 1rem;
     border-radius: 0.75rem;
     cursor: pointer;
@@ -53,27 +80,28 @@ body {
   }
   
   .thema-card:hover {
-    background-color: #2563eb;
+    background-color:rgba(109, 8, 104, 0.5);
     transform: scale(1.05);
   }
   .thema-card.active {
-    background-color: #10b981;
+    background-color: rgba(109, 8, 104, 0.7);
     transform: scale(1.05);
   }
   
   #startBtn {
     padding: 1rem 2rem;
     font-size: 1.1rem;
-    background-color: #10b981;
+    background-color: #247a6c;
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 15px;
     cursor: pointer;
     transition: 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.1);
   }
   
   #startBtn:disabled {
-    background-color: #9ca3af;
+    background-color: rgba(10, 63, 41, 0.2);
     cursor: not-allowed;
   }
   .antworten {
