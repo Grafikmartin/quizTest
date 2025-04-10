@@ -114,14 +114,16 @@ body {
   .antwort-btn {
     padding: 0.8rem;
     font-size: 1rem;
-    background-color: #3b82f6;
+    background-color: rgba(109, 8, 104, 0.5);
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 15px;
     cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.1);
   }
   
   .antwort-btn:hover {
-    background-color: #2563eb;
+    background-color:  rgba(109, 8, 104, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.5);
   }
   
