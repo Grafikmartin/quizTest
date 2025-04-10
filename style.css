@@ -9,9 +9,9 @@
   --text-color: white;
   --card-border: rgba(255, 255, 255, 0.1);
   --card-border-hover: rgba(255, 255, 255, 0.5);
-  --card-bg: rgba(65, 2, 73, 0.5);
-  --card-bg-hover: rgba(117, 4, 112, 0.5);
-  --card-bg-active: rgba(168, 3, 160, 0.7);
+  --card-bg: rgba(136, 233, 176, 0.5);
+  --card-bg-hover: rgba(0, 139, 98, 0.5);
+  --card-bg-active: rgba(0, 104, 78, 0.7);
   
   --btn-bg: #247a6c;
   --btn-bg-disabled: rgba(10, 63, 41, 0.2);
@@ -25,7 +25,7 @@
   --select-border: #ccc;
 
   /* 🧠 Container-Styling */
-  --container-bg: rgba(0, 0, 0, 0.8);
+  --container-bg: rgba(66, 85, 63, 0.5);
   --container-shadow: rgba(0, 0, 0, 0.2);
 }
 

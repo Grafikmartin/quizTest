@@ -35,7 +35,7 @@ startBtn.addEventListener("click", async () => {
 
   if (!thema) return;
 
-  startBtn.textContent = "⏳ Fragen werden geladen...";
+  startBtn.textContent = "Fragen werden geladen...";
   startBtn.disabled = true;
 
   try {
@@ -55,10 +55,10 @@ startBtn.addEventListener("click", async () => {
       console.error("Antwort vom Server:", data);
     }
 
-    startBtn.textContent = "🚀 Quiz starten";
+    startBtn.textContent = "Quiz starten";
   } catch (err) {
     console.error("Fehler beim Laden der Fragen:", err);
-    startBtn.textContent = "🚀 Quiz starten";
+    startBtn.textContent = "Quiz starten";
   }
 
   startBtn.disabled = false;
@@ -135,6 +135,6 @@ function zeigeErgebnis(gesamt, richtig) {
   document.querySelector(".container").innerHTML = `
     <h2>🎉 Quiz beendet!</h2>
     <p>Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
-    <button onclick="location.reload()">🔁 Nochmal spielen</button>
+    <button onclick="location.reload()">Nochmal spielen</button>
   `;
 }
