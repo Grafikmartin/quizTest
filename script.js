@@ -153,11 +153,11 @@ function zeigeFrage(quiz, index, score) {
 // Ergebnis anzeigen
 function zeigeErgebnis(gesamt, richtig) {
   document.querySelector(".container").innerHTML = `
-    <h2>🎉 Quiz beendet!</h2>
+    <h2>Quiz beendet!</h2>
     <p>Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
     <div class="button-group">
-      <button onclick="location.reload()">🔄 Nochmal spielen</button>
-      <button onclick="location.reload()">🏠 Zur Startseite</button>
+      <button onclick="location.reload()">+Nochmal spielen</button>
+      <button onclick="location.reload()">Zur Startseite</button>
     </div>
   `;
 }
