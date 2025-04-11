@@ -101,7 +101,7 @@ function zeigeFrage(quiz, index, score) {
   document.querySelector(".container").innerHTML = `
     <div class="quiz-header">
       <h2>Frage ${index + 1} von ${quiz.length}</h2>
-      <button id="abbruchBtn" class="abbruch-btn">❌ Quiz abbrechen</button>
+      <button id="abbruchBtn" class="abbruch-btn">Quiz abbrechen</button>
     </div>
     <p class="quiz-frage">${aktuelle.frage}</p>
     <div class="antworten">
@@ -128,7 +128,7 @@ function zeigeFrage(quiz, index, score) {
         feedback.style.color = "white";
         neuerScore++;
       } else {
-        feedback.textContent = `❌ Falsch. Richtig war: ${korrekt}`;
+        feedback.textContent = `Leider Falsch. Richtig war: ${korrekt}`;
         feedback.style.color = "white";
       }
 

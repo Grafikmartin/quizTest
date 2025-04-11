@@ -285,7 +285,7 @@ p {
   font-weight: 500;
 }
 .abbruch-btn {
-  background-color: none;
+  background-color: var(--answer-bg);
   color: var(--text-color);
   border: 2x solid var(--text-color);
   border-radius: 15px;
@@ -296,13 +296,13 @@ p {
 }
 
 .abbruch-btn:hover {
-  background-color: none;
+  background-color: var(--answer-bg-hover);
   border: 3px solid var(--text-color);
   font-weight: bold;
 }
 
 .button-group {
-  background-color: none;
+  background-color: var(--answer-bg);
   color: var(--text-color);
   border: 2x solid var(--text-color);
   border-radius: 15px;
@@ -312,7 +312,7 @@ p {
   transition: background-color 0.3s;
 }
 .button-group .abbruch-btn {
-  background-color: none;
+  background-color: var(--answer-bg-hover);
   border: 3px solid var(--text-color);
   font-weight: bold;
 }
