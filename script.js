@@ -150,13 +150,25 @@ function zeigeFrage(quiz, index, score) {
 }
 
 
+
+tsx
+
+
 // Ergebnis anzeigen
 function zeigeErgebnis(gesamt, richtig) {
   document.querySelector(".container").innerHTML = `
-    <h2>Quiz beendet!</h2>
-    <p>Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
-    <div class="button-group">
-           <button onclick="location.reload()">Zur Startseite</button>
+    <h2 class="ergebnis-titel">🎉 Quiz beendet!</h2>
+    <p class="ergebnis-text">Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
+    <div class="button-container">
+      <button class="abbruch-btn">Nochmal spielen</button>
+      <button class="abbruch-btn">Zur Startseite</button>
     </div>
   `;
+  
+  // Event-Listener für die Buttons hinzufügen
+  document.querySelectorAll(".abbruch-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      location.reload();
+    });
+  });
 }
