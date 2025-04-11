@@ -287,18 +287,23 @@ p {
 .abbruch-btn {
   background-color: var(--answer-bg);
   color: var(--text-color);
-  border: 2x solid var(--text-color);
+  border: 2px solid var(--text-color);
   border-radius: 15px;
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.3s;
 }
-
 .abbruch-btn:hover {
   background-color: var(--answer-bg-hover);
   border: 3px solid var(--text-color);
   font-weight: bold;
+}
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
 .button-group {
