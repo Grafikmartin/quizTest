@@ -87,12 +87,22 @@ function parseQuizText(text) {
   return fragen;
 }
 
+// Zur Startseite zurückkehren
+function zurueckZurStartseite() {
+  if (confirm("Möchtest du das Quiz wirklich abbrechen?")) {
+    location.reload();
+  }
+}
+
 // Frage anzeigen + Interaktion
 function zeigeFrage(quiz, index, score) {
   const aktuelle = quiz[index];
 
   document.querySelector(".container").innerHTML = `
-    <h2>Frage ${index + 1} von ${quiz.length}</h2>
+    <div class="quiz-header">
+      <h2>Frage ${index + 1} von ${quiz.length}</h2>
+      <button id="abbruchBtn" class="abbruch-btn">❌ Quiz abbrechen</button>
+    </div>
     <p>${aktuelle.frage}</p>
     <div class="antworten">
       ${Object.entries(aktuelle.antworten).map(([key, value]) => `
@@ -101,6 +111,9 @@ function zeigeFrage(quiz, index, score) {
     </div>
     <p id="feedback"></p>
   `;
+
+  // Event-Listener für den Abbruch-Button
+  document.getElementById("abbruchBtn").addEventListener("click", zurueckZurStartseite);
 
   document.querySelectorAll(".antwort-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -135,6 +148,9 @@ function zeigeErgebnis(gesamt, richtig) {
   document.querySelector(".container").innerHTML = `
     <h2>🎉 Quiz beendet!</h2>
     <p>Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
-    <button onclick="location.reload()">Nochmal spielen</button>
+    <div class="button-group">
+      <button onclick="location.reload()">🔄 Nochmal spielen</button>
+      <button onclick="location.reload()">🏠 Zur Startseite</button>
+    </div>
   `;
 }
