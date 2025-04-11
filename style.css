@@ -30,11 +30,13 @@
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #e0f2fe, #f0f9ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  overflow-x: hidden;
+  margin: 0;
 }
 
 .quiz-bg {
@@ -127,19 +129,18 @@ body {
     filter: var(--f) hue-rotate(1turn);
   }
 }
-
 .container {
-  position: relative;
-  max-width: 900px;
-  margin: 40px auto;
+  background: white;
   padding: 2rem;
-  background: var(--container-bg);
-  border-radius: 15px;
-  box-shadow: 0 8px 24px var(--container-shadow);
-  border: 2px solid var(--card-border);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  max-width: 900px;
   text-align: center;
-  margin-left: 8%;
-  margin-right: 8%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 h1 {
@@ -238,11 +239,11 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-top: 1rem;
+  margin: 1.5rem 0;
 }
 
 .antwort-btn {
-  padding: 0.8rem;
+  padding: 1rem;
   font-size: 1rem;
   background-color: var(--card-bg-hover);
   color: var(--text-color);
@@ -261,10 +262,30 @@ p {
   align-items: center;
   margin-bottom: 1rem;
 }
+.quiz-header h2 {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
 
+.quiz-frage {
+  font-size: 1.25em; /* 25% größer */
+  margin: 1.5rem 0;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+#feedback {
+  font-size: 1.25em; /* Gleiche Größe wie Frage */
+  color: var(--text-color);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 1rem 0;
+  font-weight: 500;
+}
 .abbruch-btn {
   background-color: #ff4d4d;
-  color: white;
+  color: var(--text-color);
   border: none;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;

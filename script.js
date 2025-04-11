@@ -103,7 +103,7 @@ function zeigeFrage(quiz, index, score) {
       <h2>Frage ${index + 1} von ${quiz.length}</h2>
       <button id="abbruchBtn" class="abbruch-btn">❌ Quiz abbrechen</button>
     </div>
-    <p>${aktuelle.frage}</p>
+    <p class="quiz-frage">${aktuelle.frage}</p>
     <div class="antworten">
       ${Object.entries(aktuelle.antworten).map(([key, value]) => `
         <button class="antwort-btn" data-key="${key}">${key}: ${value}</button>
@@ -125,12 +125,18 @@ function zeigeFrage(quiz, index, score) {
 
       if (auswahl === korrekt) {
         feedback.textContent = "✅ Richtig!";
-        feedback.style.color = "lightgreen";
+        feedback.style.color = "white";
         neuerScore++;
       } else {
         feedback.textContent = `❌ Falsch. Richtig war: ${korrekt}`;
-        feedback.style.color = "salmon";
+        feedback.style.color = "white";
       }
+
+      // Buttons deaktivieren nach Auswahl
+      document.querySelectorAll(".antwort-btn").forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+      });
 
       setTimeout(() => {
         if (index + 1 < quiz.length) {
@@ -142,6 +148,7 @@ function zeigeFrage(quiz, index, score) {
     });
   });
 }
+
 
 // Ergebnis anzeigen
 function zeigeErgebnis(gesamt, richtig) {
