@@ -6,7 +6,29 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Thema oder Level fehlt" });
     }
 
-    const prompt = `Erstelle 10 Quizfragen zum Thema "${thema}" mit dem Schwierigkeitsgrad "${level}". Jede Frage hat 4 Antwortmöglichkeiten (A bis D), nur eine ist richtig. Formatiere sie so:
+    // Detaillierte Beschreibung der Schwierigkeitsstufen
+    const levelBeschreibungen = {
+      "Anfänger": "sehr einfache Fragen, die jeder beantworten kann, auch ohne Vorwissen",
+      "Kandidat": "einfache Fragen mit grundlegendem Allgemeinwissen",
+      "Halbfinale": "mittelschwere Fragen, die etwas tieferes Wissen erfordern",
+      "Finale": "schwierige Fragen, die detailliertes Wissen erfordern",
+      "Quizchampion": "sehr anspruchsvolle Fragen mit Expertenwissen und kniffligen Details"
+    };
+
+    const levelBeschreibung = levelBeschreibungen[level] || "mittelschwere Fragen";
+
+    const prompt = `Erstelle 10 Quizfragen zum Thema "${thema}" mit folgendem Schwierigkeitsgrad:
+    
+Aktuell gewählter Schwierigkeitsgrad: "${level}" (${levelBeschreibung})
+
+Beachte dabei die Abstufung der Schwierigkeitsgrade:
+- Anfänger (Hohlbirne): Sehr einfache, grundlegende Fragen die jeder beantworten kann
+- Kandidat (Alltagsdenker): Einfache Fragen mit Basis-Allgemeinwissen
+- Halbfinale (Klugscheißer): Mittelschwere Fragen mit spezifischerem Wissen
+- Finale (Besserwisser-Genie): Schwierige Fragen die detailliertes Fachwissen erfordern
+- Quizchampion (Superhirn mit Dachschaden): Extrem schwierige Expertenfragen mit Details und Feinheiten
+
+Formatiere die Fragen wie folgt:
 
 Frage 1: [Text]
 A: ...
@@ -15,7 +37,13 @@ C: ...
 D: ...
 Richtige Antwort: [A/B/C/D]
 
-Wiederhole das für alle 10 Fragen.`;
+Wichtig: 
+- Stelle sicher, dass die Fragen EXAKT dem gewählten Schwierigkeitsgrad "${level}" entsprechen
+- Die Antwortmöglichkeiten sollten plausibel sein
+- Bei höheren Schwierigkeitsgraden auch Fangfragen und Details einbauen
+- Bei niedrigeren Schwierigkeitsgraden die Fragen einfach und klar formulieren
+
+Erstelle nun 10 Fragen in diesem Format.`;
 
     const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -25,7 +53,14 @@ Wiederhole das für alle 10 Fragen.`;
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: prompt }],
+        messages: [{ 
+          role: "system", 
+          content: "Du bist ein erfahrener Quizmaster, der Fragen exakt nach Schwierigkeitsgrad erstellt."
+        },
+        { 
+          role: "user", 
+          content: prompt 
+        }],
         temperature: 0.7,
       }),
     });
