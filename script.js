@@ -157,7 +157,7 @@ tsx
 // Ergebnis anzeigen
 function zeigeErgebnis(gesamt, richtig) {
   document.querySelector(".container").innerHTML = `
-    <h2 class="ergebnis-titel">🎉 Quiz beendet!</h2>
+    <h2 class="ergebnis-titel">Das Quiz ist beendet!</h2>
     <p class="ergebnis-text">Du hast ${richtig} von ${gesamt} Fragen richtig beantwortet.</p>
     <div class="button-container">
       <button class="abbruch-btn">Nochmal spielen</button>
